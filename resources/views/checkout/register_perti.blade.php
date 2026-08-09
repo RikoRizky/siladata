@@ -32,7 +32,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Nama Perguruan Tinggi</label>
                         <div class="mt-2">
-                            <input id="name" name="name" type="text" value="{{ old('name') }}" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
+                            <input id="name" name="name" type="text" value="{{ old('name', $transaction->customer_name) }}" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6">
                         </div>
                         @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>

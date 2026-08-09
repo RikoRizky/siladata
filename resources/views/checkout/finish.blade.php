@@ -61,7 +61,7 @@
                                         {{ $transaction->customer_email }}
                                     </p>
                                     <p class="mt-2 text-xs text-blue-600">
-                                        Klik link tersebut untuk membuat akun Perguruan Tinggi Anda. Link berlaku selama <strong>24 jam</strong>. Periksa folder Spam jika tidak menemukannya.
+                                        Klik link tersebut untuk membuat akun Perguruan Tinggi Anda. Link pendaftaran ini akan terus berlaku sampai Anda berhasil membuat akun. Periksa folder Spam jika tidak menemukannya.
                                     </p>
                                 </div>
                             </div>
