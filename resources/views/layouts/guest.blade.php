@@ -65,5 +65,33 @@
             </div>
         </div>
 
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Akses Ditolak',
+                    text: "{!! session('error') !!}",
+                    confirmButtonColor: '#7c3aed',
+                });
+            });
+        </script>
+        @endif
+
+        @if(session('status'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: "{!! session('status') !!}",
+                    confirmButtonColor: '#7c3aed',
+                });
+            });
+        </script>
+        @endif
+
     </body>
 </html>
