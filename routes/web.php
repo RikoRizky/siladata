@@ -36,6 +36,10 @@ Route::get('/payment/finish', [CheckoutController::class, 'finish'])->name('chec
 
 Route::post('/midtrans/webhook', [MidtransWebhookController::class, 'handle']);
 
+use App\Http\Controllers\Auth\GoogleController;
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 Route::get('/register-perti/{token}', [PertiRegistrationController::class, 'showForm'])->name('register-perti.form');
 Route::post('/register-perti/{token}', [PertiRegistrationController::class, 'process'])->name('register-perti.process');
 
