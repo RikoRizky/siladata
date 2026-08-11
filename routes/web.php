@@ -80,6 +80,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('modules', ModuleController::class);
     Route::resource('modules.requirements', RequirementController::class);
     Route::get('reports/pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
+    
+    // Broadcast Notification
+    Route::get('broadcast', [App\Http\Controllers\Admin\BroadcastController::class, 'index'])->name('broadcast.index');
+    Route::post('broadcast', [App\Http\Controllers\Admin\BroadcastController::class, 'send'])->name('broadcast.send');
 });
 
 Route::middleware(['auth', 'role:perti'])->prefix('perti')->name('perti.')->group(function () {
