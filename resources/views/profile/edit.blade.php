@@ -87,6 +87,30 @@
             </div>
         </div>
 
+        <div class="ui-card p-6 sm:p-8 border-rose-100 bg-rose-50/10">
+            <div class="max-w-xl">
+                <header>
+                    <h2 class="text-lg font-medium text-slate-900">
+                        Keluar dari Aplikasi
+                    </h2>
+                    <p class="mt-1 text-sm text-slate-600">
+                        Akhiri sesi Anda saat ini dan kembali ke halaman login.
+                    </p>
+                </header>
+                <div class="mt-6">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-200 bg-white px-4 py-2.5 text-sm font-semibold text-rose-600 shadow-sm transition hover:border-rose-300 hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            </svg>
+                            Keluar (Logout)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="ui-card border-slate-100 p-6 sm:p-8">
             <div class="max-w-xl">
                 @include('profile.partials.account-deletion-policy')

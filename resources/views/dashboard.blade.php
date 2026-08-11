@@ -21,7 +21,7 @@
         @endphp
 
         {{-- Welcome Banner Admin --}}
-        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-6 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
+        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-5 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
             <div class="relative z-10">
                 <p class="text-violet-300 text-xs font-bold uppercase tracking-widest">Admin · SILADATA</p>
                 <h2 class="mt-1.5 text-xl font-black sm:text-2xl">Selamat datang, {{ auth()->user()->name }}! 👋</h2>
@@ -161,7 +161,7 @@
         @endphp
 
         {{-- Welcome Banner Perti --}}
-        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-6 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
+        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-5 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
             <div class="relative z-10">
                 <p class="text-violet-300 text-xs font-bold uppercase tracking-widest">Perguruan Tinggi · SILADATA</p>
                 <h2 class="mt-1.5 text-xl font-black sm:text-2xl">Selamat datang, {{ auth()->user()->name }}! 👋</h2>
@@ -428,7 +428,7 @@
         @endphp
 
         {{-- Welcome Banner Prodi --}}
-        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-6 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
+        <div class="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-5 sm:p-8 shadow-xl shadow-violet-500/20 text-white">
             <div class="relative z-10">
                 <p class="text-violet-300 text-xs font-bold uppercase tracking-widest">Program Studi · SILADATA</p>
                 <h2 class="mt-1.5 text-xl font-black sm:text-2xl">Selamat datang, {{ auth()->user()->name }}! 👋</h2>

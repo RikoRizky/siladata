@@ -264,12 +264,22 @@
     </nav>
 
     <div class="mt-auto border-t border-white/10 p-4">
-        <div class="rounded-xl bg-white/5 p-3 ring-1 ring-white/10 flex items-center gap-3">
-            <img src="{{ auth()->user()->profile_photo_url }}" alt="Profile" class="h-9 w-9 rounded-full object-cover shrink-0 bg-slate-800 ring-2 ring-white/10">
-            <div class="min-w-0 flex-1">
-                <p class="truncate text-sm font-semibold text-white">{{ auth()->user()->name }}</p>
-                <p class="mt-0.5 truncate text-xs text-violet-300">{{ $role->label() }}</p>
+        <div class="rounded-xl bg-white/5 p-3 ring-1 ring-white/10 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-3 min-w-0">
+                <img src="{{ auth()->user()->profile_photo_url }}" alt="Profile" class="h-9 w-9 rounded-full object-cover shrink-0 bg-slate-800 ring-2 ring-white/10">
+                <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold text-white">{{ auth()->user()->name }}</p>
+                    <p class="mt-0.5 truncate text-xs text-violet-300">{{ $role->label() }}</p>
+                </div>
             </div>
+            <form method="POST" action="{{ route('logout') }}" class="shrink-0">
+                @csrf
+                <button type="submit" class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/10 hover:text-white" title="Keluar">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
 </aside>

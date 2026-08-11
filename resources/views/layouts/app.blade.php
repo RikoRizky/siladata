@@ -52,12 +52,17 @@
                     </div>
                 @endif
                 @isset($header)
-                    <header class="sticky top-0 z-20 shrink-0 border-b border-slate-200/60 bg-white/85 shadow-sm backdrop-blur-lg">
+                    <header class="relative lg:sticky lg:top-0 z-20 shrink-0 border-b border-slate-200/60 bg-white/85 shadow-sm backdrop-blur-lg">
                         <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
                             <div class="min-w-0 flex-1">
                                 {{ $header }}
                             </div>
-                            <div class="flex shrink-0 items-center rounded-full border border-slate-200/80 bg-white/60 shadow-sm backdrop-blur-sm">
+                            <style>
+                                @media (max-width: 1024px) {
+                                    .desktop-profile-only { display: none !important; }
+                                }
+                            </style>
+                            <div class="flex desktop-profile-only shrink-0 items-center rounded-full border border-slate-200/80 bg-white/60 shadow-sm backdrop-blur-sm">
                                 <a href="{{ route('profile.edit') }}" class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold text-slate-600 transition-all duration-200 hover:bg-violet-50 hover:text-violet-700">
                                     <img src="{{ auth()->user()->profile_photo_url }}" alt="Profile" class="h-6 w-6 rounded-full object-cover ring-2 ring-violet-500/10">
                                     <span class="hidden sm:inline">Profil</span>
