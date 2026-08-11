@@ -18,6 +18,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnitKerja\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/run-queue-rahasia-123', function () {
+    \Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true]);
+    return 'Sukses: ' . \Illuminate\Support\Facades\Artisan::output();
+});
+
 Route::get('/', HomeController::class)->name('home');
 Route::get('/harga', function () {
     return view('home.harga');
