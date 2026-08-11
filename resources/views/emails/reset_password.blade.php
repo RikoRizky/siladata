@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pembayaran Berhasil - SILADATA</title>
+    <title>Atur Ulang Sandi - SILADATA</title>
 </head>
 <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f7fa; color: #333333; line-height: 1.6; margin: 0; padding: 0;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f7fa; padding: 40px 0;">
@@ -21,27 +21,29 @@
                     <!-- Content -->
                     <tr>
                         <td style="padding: 40px;">
-                            <h2 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 22px;">Pembayaran Berhasil! 🎉</h2>
+                            <h2 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 22px;">Permintaan Atur Ulang Sandi 🔒</h2>
                             
-                            <p style="font-size: 16px; margin-bottom: 15px;">Halo <strong>{{ $transaction->customer_name }}</strong>,</p>
+                            <p style="font-size: 16px; margin-bottom: 15px;">Halo <strong>{{ $notifiable->name }}</strong>,</p>
                             
-                            <p style="font-size: 16px; margin-bottom: 25px;">Terima kasih, pembayaran Anda untuk <strong>Paket {{ $transaction->package_name }}</strong> telah kami terima dengan baik.</p>
+                            <p style="font-size: 16px; margin-bottom: 25px;">Anda menerima email ini karena kami menerima permintaan atur ulang sandi (reset password) untuk akun Anda.</p>
                             
-                            @if(!$transaction->user_id && !$transaction->is_registered)
-                            <div style="background-color: #f8f9fa; border-left: 4px solid #007bff; padding: 20px; margin: 30px 0; border-radius: 0 4px 4px 0;">
-                                <h3 style="margin-top: 0; color: #2c3e50; font-size: 18px; margin-bottom: 10px;">Langkah Selanjutnya</h3>
-                                <p style="font-size: 15px; margin-bottom: 20px; color: #555;">Silakan buat akun administrator Perguruan Tinggi (Perti) Anda untuk mulai mengelola dokumen akreditasi.</p>
-                                
-                                <a href="{{ route('register-perti.form', $transaction->registration_token) }}" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; text-align: center;">Buat Akun Perguruan Tinggi</a>
+                            <div style="text-align: center; margin: 30px 0;">
+                                <a href="{{ $url }}" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; text-align: center;">Atur Ulang Sandi</a>
                             </div>
-                            @else
-                            <div style="background-color: #e8f5e9; border-left: 4px solid #2e7d32; padding: 20px; margin: 30px 0; border-radius: 0 4px 4px 0;">
-                                <p style="margin: 0; font-size: 16px; color: #1b5e20;">Paket langganan Anda telah berhasil diperpanjang/diupgrade. Anda dapat kembali menggunakan layanan kami.</p>
-                            </div>
-                            @endif
+                            
+                            <p style="font-size: 16px; margin-bottom: 25px;">Tautan atur ulang sandi ini akan kedaluwarsa dalam {{ config('auth.passwords.'.config('auth.defaults.passwords').'.expire') }} menit.</p>
+                            
+                            <p style="font-size: 16px; margin-bottom: 30px;">Jika Anda tidak melakukan permintaan atur ulang sandi, tidak ada tindakan lebih lanjut yang perlu dilakukan dan akun Anda tetap aman.</p>
                             
                             <p style="font-size: 16px; margin-top: 30px; margin-bottom: 5px;">Terima kasih telah menggunakan SILADATA.</p>
                             <p style="font-size: 16px; color: #777; margin-top: 0;">Salam hangat,<br><strong>Tim SILADATA</strong></p>
+                            
+                            <hr style="border: 0; border-top: 1px solid #eeeeee; margin: 30px 0;">
+                            
+                            <p style="font-size: 12px; color: #999999; word-break: break-all;">
+                                Jika Anda mengalami kesulitan saat mengklik tombol "Atur Ulang Sandi", salin dan tempel URL di bawah ini ke peramban (browser) Anda:<br>
+                                <a href="{{ $url }}" style="color: #007bff;">{{ $url }}</a>
+                            </p>
                         </td>
                     </tr>
                     
