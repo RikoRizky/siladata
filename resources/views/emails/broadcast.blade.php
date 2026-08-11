@@ -5,38 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $subjectText }}</title>
 </head>
-<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f7fa; color: #333333; line-height: 1.6; margin: 0; padding: 0;">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f7fa; padding: 40px 0;">
+<body style="font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f3f4f6; color: #1f2937; line-height: 1.6; margin: 0; padding: 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f3f4f6; padding: 40px 0;">
         <tr>
             <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); overflow: hidden; margin: 0 auto; text-align: left;">
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); overflow: hidden; margin: 0 auto; text-align: left;">
                     
+                    <!-- Top Gradient Bar -->
+                    <tr>
+                        <td style="height: 6px; background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);"></td>
+                    </tr>
+
                     <!-- Header -->
                     <tr>
-                        <td style="background-color: #007bff; padding: 30px 40px; text-align: center;">
-                            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: bold; letter-spacing: 1px;">SILADATA</h1>
+                        <td style="padding: 30px 40px 20px 40px; text-align: center;">
+                            <img src="{{ url('images/logoname.png') }}" alt="SILADATA" style="max-height: 45px; width: auto;">
                         </td>
                     </tr>
                     
                     <!-- Content -->
                     <tr>
-                        <td style="padding: 40px;">
-                            <h2 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 20px;">{{ $subjectText }}</h2>
+                        <td style="padding: 10px 40px 40px 40px;">
+                            <h2 style="color: #111827; margin-top: 0; margin-bottom: 24px; font-size: 22px; font-weight: 700;">{{ $subjectText }}</h2>
                             
-                            <div style="font-size: 16px; margin-bottom: 30px; white-space: pre-wrap;">{{ $messageContent }}</div>
+                            <div style="font-size: 16px; margin-bottom: 30px; white-space: pre-wrap; color: #4b5563;">{{ $messageContent }}</div>
                             
-                            <p style="font-size: 16px; margin-top: 30px; margin-bottom: 5px;">Terima kasih telah menggunakan SILADATA.</p>
-                            <p style="font-size: 16px; color: #777; margin-top: 0;">Salam hangat,<br><strong>Tim SILADATA</strong></p>
+                            <div style="border-top: 1px solid #e5e7eb; padding-top: 24px; margin-top: 40px;">
+                                <p style="font-size: 15px; margin-bottom: 5px; color: #374151;">Terima kasih telah menggunakan <strong>SILADATA</strong>.</p>
+                                <p style="font-size: 15px; color: #6b7280; margin-top: 0;">Salam hangat,<br><strong style="color: #111827;">Tim SILADATA</strong></p>
+                            </div>
                         </td>
                     </tr>
                     
                     <!-- Footer -->
                     <tr>
-                        <td style="background-color: #f8f9fa; padding: 25px 40px; text-align: center; border-top: 1px solid #eeeeee;">
-                            <p style="margin: 0; font-size: 14px; color: #666666;">
+                        <td style="background-color: #f9fafb; padding: 24px 40px; text-align: center; border-top: 1px solid #f3f4f6;">
+                            <p style="margin: 0; font-size: 13px; color: #6b7280; line-height: 1.5;">
                                 Jika Anda memerlukan bantuan atau memiliki pertanyaan, jangan ragu untuk menghubungi kami di 
                                 <br>
-                                <a href="mailto:siladata.official@gmail.com" style="color: #007bff; text-decoration: none; font-weight: bold;">siladata.official@gmail.com</a>
+                                <a href="mailto:siladata.official@gmail.com" style="color: #3b82f6; text-decoration: none; font-weight: 600;">siladata.official@gmail.com</a>
+                            </p>
+                            <p style="margin: 15px 0 0 0; font-size: 12px; color: #9ca3af;">
+                                &copy; {{ date('Y') }} SILADATA. Hak Cipta Dilindungi.
                             </p>
                         </td>
                     </tr>
