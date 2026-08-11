@@ -32,12 +32,7 @@
             <div class="mt-10 w-full max-w-4xl mx-auto">
                 <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-6">Cara Kerja</p>
 
-                {{-- Desktop: horizontal stepper --}}
-                <div class="hidden sm:flex items-start justify-between relative">
-                    {{-- Connector line behind steps --}}
-                    <div class="absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-violet-200 via-blue-200 to-emerald-200 z-0 mx-[calc(10%)]"></div>
-
-                    @php
+                @php
                     $steps = [
                         [
                             'num'   => '1',
@@ -90,41 +85,41 @@
                             'soft'  => 'bg-emerald-50',
                         ],
                     ];
-                    @endphp
+                @endphp
 
-                    @foreach($steps as $step)
-                    <div class="relative z-10 flex flex-1 flex-col items-center gap-3 px-2">
-                        {{-- Circle badge --}}
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full {{ $step['bg'] }} ring-4 {{ $step['ring'] }} shadow-md">
-                            <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {!! $step['icon'] !!}
-                            </svg>
+                {{-- Horizontal stepper (berlaku untuk semua ukuran layar) --}}
+                <div class="flex items-start justify-between relative w-full overflow-x-auto pb-4 sm:pb-0 hide-scrollbar snap-x">
+                    <div class="flex items-start justify-between relative w-full min-w-[500px] sm:min-w-0">
+                        {{-- Connector line behind steps --}}
+                        <div class="absolute top-5 sm:top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-violet-200 via-blue-200 to-emerald-200 z-0 mx-[10%]"></div>
+
+                        @foreach($steps as $step)
+                        <div class="relative z-10 flex flex-1 flex-col items-center gap-2 px-1 sm:px-2 snap-center">
+                            {{-- Circle badge --}}
+                            <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full {{ $step['bg'] }} ring-4 {{ $step['ring'] }} shadow-md shrink-0">
+                                <svg class="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    {!! $step['icon'] !!}
+                                </svg>
+                            </div>
+                            {{-- Label --}}
+                            <div class="text-center mt-1 sm:mt-0">
+                                <p class="text-[10px] sm:text-sm font-bold text-slate-800 leading-tight">{{ $step['label'] }}</p>
+                                <p class="mt-0.5 text-[9px] sm:text-xs text-slate-400 leading-snug max-w-[120px]">{{ $step['sub'] }}</p>
+                            </div>
                         </div>
-                        {{-- Label --}}
-                        <div class="text-center">
-                            <p class="text-sm font-bold text-slate-800 leading-tight">{{ $step['label'] }}</p>
-                            <p class="mt-0.5 text-xs text-slate-400 leading-snug">{{ $step['sub'] }}</p>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
 
-                {{-- Mobile: vertical stepper --}}
-                <div class="sm:hidden flex flex-col gap-0 rounded-2xl bg-white/80 border border-slate-200/70 shadow-sm backdrop-blur-sm overflow-hidden divide-y divide-slate-100">
-                    @foreach($steps as $step)
-                    <div class="flex items-center gap-4 px-5 py-4">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full {{ $step['bg'] }} shadow">
-                            <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {!! $step['icon'] !!}
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-slate-800">{{ $step['label'] }}</p>
-                            <p class="text-xs text-slate-400">{{ $step['sub'] }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                <style>
+                    .hide-scrollbar::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .hide-scrollbar {
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                    }
+                </style>
             </div>
         </div>
     </section>
