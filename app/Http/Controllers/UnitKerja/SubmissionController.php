@@ -50,6 +50,11 @@ class SubmissionController extends Controller
     {
         $this->authorizeUnitKerja();
 
+        if (auth()->user()->effective_package === 'Starter') {
+            return redirect()->route('unit.submissions.module', $module)
+                ->withErrors(['files' => 'Paket Starter tidak mendukung unggah file langsung. Gunakan link Google Drive.']);
+        }
+
         $module->load(['requirements' => fn ($q) => $q->orderBy('sort_order')]);
         $requirements = $module->requirements->keyBy('id');
 
@@ -182,6 +187,10 @@ class SubmissionController extends Controller
 
         if (empty($driveLinks) && empty($filesList) && empty($keepFiles)) {
             $validator->errors()->add('google_drive_links', 'Harap isi minimal satu link Google Drive atau unggah/simpan berkas dokumen.');
+        }
+
+        if (auth()->user()->effective_package === 'Starter' && (!empty($filesList) || $request->hasFile('document'))) {
+            $validator->errors()->add('documents', 'Paket Starter tidak mendukung unggah file langsung. Gunakan link Google Drive.');
         }
 
         if ($validator->fails() || (empty($driveLinks) && empty($filesList) && empty($keepFiles))) {

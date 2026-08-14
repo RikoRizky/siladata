@@ -40,8 +40,20 @@ class ProdiController extends Controller
         return view('perti.prodis.index', compact('prodis'));
     }
 
-    public function create(): View
+    public function create(): View|\Illuminate\Http\RedirectResponse
     {
+        $pertiProfile = auth()->user()->pertiProfile;
+        abort_if(is_null($pertiProfile), 403);
+
+        $package = auth()->user()->effective_package;
+        $prodiCount = Prodi::query()->where('perti_id', $pertiProfile->id)->count();
+        $limit = $package === 'Starter' ? 3 : ($package === 'Pro' ? 10 : -1);
+
+        if ($limit !== -1 && $prodiCount >= $limit) {
+            return redirect()->route('perti.prodis.index')
+                ->with('error', "Batas pembuatan akun Program Studi (maksimal {$limit}) tercapai untuk paket {$package} Anda.");
+        }
+
         return view('perti.prodis.create');
     }
 
@@ -49,6 +61,15 @@ class ProdiController extends Controller
     {
         $pertiProfile = auth()->user()->pertiProfile;
         abort_if(is_null($pertiProfile), 403);
+
+        $package = auth()->user()->effective_package;
+        $prodiCount = Prodi::query()->where('perti_id', $pertiProfile->id)->count();
+        $limit = $package === 'Starter' ? 3 : ($package === 'Pro' ? 10 : -1);
+
+        if ($limit !== -1 && $prodiCount >= $limit) {
+            return redirect()->route('perti.prodis.index')
+                ->with('error', "Batas pembuatan akun Program Studi (maksimal {$limit}) tercapai untuk paket {$package} Anda.");
+        }
 
         $validated = $request->validate([
             'name'       => ['required', 'string', 'max:255'],

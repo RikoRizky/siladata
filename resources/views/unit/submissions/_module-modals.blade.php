@@ -113,72 +113,85 @@
                                 </div>
                             </div>
 
-                            <!-- Divider -->
-                            <div class="relative flex items-center">
-                                <div class="flex-1 border-t border-slate-100"></div>
-                                <span class="mx-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">Atau unggah berkas</span>
-                                <div class="flex-1 border-t border-slate-100"></div>
-                            </div>
+                            @if (auth()->user()->effective_package !== 'Starter')
+                                <!-- Divider -->
+                                <div class="relative flex items-center">
+                                    <div class="flex-1 border-t border-slate-100"></div>
+                                    <span class="mx-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">Atau unggah berkas</span>
+                                    <div class="flex-1 border-t border-slate-100"></div>
+                                </div>
 
-                            <!-- File Upload -->
-                            <div>
-                                <p class="text-sm font-semibold text-slate-800 mb-0.5">
-                                    Berkas Dokumen
-                                    <span class="ml-1 text-xs font-normal text-slate-400">(Opsional)</span>
-                                </p>
-                                <p class="text-xs text-slate-400 mb-3">PDF atau Excel · Maks. {{ $maxUploadMb }} MB · Bisa pilih lebih dari 1</p>
+                                <!-- File Upload -->
+                                <div>
+                                    <p class="text-sm font-semibold text-slate-800 mb-0.5">
+                                        Berkas Dokumen
+                                        <span class="ml-1 text-xs font-normal text-slate-400">(Opsional)</span>
+                                    </p>
+                                    <p class="text-xs text-slate-400 mb-3">PDF atau Excel · Maks. {{ $maxUploadMb }} MB · Bisa pilih lebih dari 1</p>
 
-                                <!-- Dropzone -->
-                                <label for="file-input-{{ $req->id }}" id="dropzone-{{ $req->id }}"
-                                    class="relative flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/80 px-4 py-7 text-center cursor-pointer transition-all duration-200 hover:border-violet-400 hover:bg-violet-50/40 group">
-                                    <!-- Icon -->
-                                    <span class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm text-slate-400 group-hover:border-violet-300 group-hover:text-violet-500 transition">
-                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
-                                        </svg>
-                                    </span>
+                                    <!-- Dropzone -->
+                                    <label for="file-input-{{ $req->id }}" id="dropzone-{{ $req->id }}"
+                                        class="relative flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/80 px-4 py-7 text-center cursor-pointer transition-all duration-200 hover:border-violet-400 hover:bg-violet-50/40 group">
+                                        <!-- Icon -->
+                                        <span class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm text-slate-400 group-hover:border-violet-300 group-hover:text-violet-500 transition">
+                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
+                                            </svg>
+                                        </span>
+                                        <div>
+                                            <p id="dropzone-label-{{ $req->id }}" class="text-sm font-semibold text-slate-600 group-hover:text-violet-700 transition">Klik atau seret berkas ke sini</p>
+                                            <p class="mt-0.5 text-xs text-slate-400">PDF, XLSX, XLS</p>
+                                        </div>
+                                        <input id="file-input-{{ $req->id }}" type="file" name="documents[]" multiple accept=".pdf,.xlsx,.xls"
+                                            class="sr-only" onchange="updateFilePreview('{{ $req->id }}', this)">
+                                    </label>
+
+                                    <!-- File preview list (newly selected files) -->
+                                    <div id="file-preview-{{ $req->id }}" class="mt-2 space-y-1.5 hidden"></div>
+
+                                    <!-- Oversized file warning (shown after failed upload due to file size) -->
+                                    <div id="oversized-warning-{{ $req->id }}" class="mt-2 hidden rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-3">
+                                        <div class="flex items-start gap-2.5">
+                                            <svg class="h-4 w-4 shrink-0 text-rose-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs font-bold text-rose-700">Berkas terlalu besar:</p>
+                                                <ul id="oversized-list-{{ $req->id }}" class="mt-1 space-y-0.5 text-[11px] text-rose-600 list-disc pl-4"></ul>
+                                                <p class="mt-1.5 text-[11px] text-rose-600">Hapus berkas di atas lalu pilih ulang berkas yang lebih kecil dari {{ $maxUploadMb }} MB.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Total request size warning -->
+                                    <div id="total-size-warning-{{ $req->id }}" class="mt-2 hidden rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-3">
+                                        <div class="flex items-start gap-2.5">
+                                            <svg class="h-4 w-4 shrink-0 text-rose-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs font-bold text-rose-700">Total berkas melebihi batas request:</p>
+                                                <p class="mt-1 text-[11px] text-rose-600">
+                                                    Total ukuran berkas terpilih adalah <span id="total-size-current-{{ $req->id }}" class="font-bold">0 MB</span>, melebihi batas total maksimal sebesar <span class="font-bold">{{ $maxUploadMb }} MB</span>.
+                                                </p>
+                                                <p class="mt-1.5 text-[11px] text-rose-600">Silakan hapus beberapa berkas atau kurangi dokumen agar dapat diunggah bersamaan.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Container for existing files (retained files) -->
+                                    <div id="existing-files-container-{{ $req->id }}" class="mt-3 space-y-2"></div>
+
+                                </div>
+                            @else
+                                <!-- Feature limited state -->
+                                <div class="mt-3 rounded-xl border border-blue-200 bg-blue-50 px-3.5 py-3 flex items-start gap-3">
+                                    <svg class="h-5 w-5 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    </svg>
                                     <div>
-                                        <p id="dropzone-label-{{ $req->id }}" class="text-sm font-semibold text-slate-600 group-hover:text-violet-700 transition">Klik atau seret berkas ke sini</p>
-                                        <p class="mt-0.5 text-xs text-slate-400">PDF, XLSX, XLS</p>
-                                    </div>
-                                    <input id="file-input-{{ $req->id }}" type="file" name="documents[]" multiple accept=".pdf,.xlsx,.xls"
-                                        class="sr-only" onchange="updateFilePreview('{{ $req->id }}', this)">
-                                </label>
-
-                                <!-- File preview list (newly selected files) -->
-                                <div id="file-preview-{{ $req->id }}" class="mt-2 space-y-1.5 hidden"></div>
-
-                                <!-- Oversized file warning (shown after failed upload due to file size) -->
-                                <div id="oversized-warning-{{ $req->id }}" class="mt-2 hidden rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-3">
-                                    <div class="flex items-start gap-2.5">
-                                        <svg class="h-4 w-4 shrink-0 text-rose-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
-                                        <div class="min-w-0 flex-1">
-                                            <p class="text-xs font-bold text-rose-700">Berkas terlalu besar:</p>
-                                            <ul id="oversized-list-{{ $req->id }}" class="mt-1 space-y-0.5 text-[11px] text-rose-600 list-disc pl-4"></ul>
-                                            <p class="mt-1.5 text-[11px] text-rose-600">Hapus berkas di atas lalu pilih ulang berkas yang lebih kecil dari {{ $maxUploadMb }} MB.</p>
-                                        </div>
+                                        <p class="text-sm font-semibold text-blue-800">Unggah file langsung tidak tersedia</p>
+                                        <p class="mt-1 text-xs text-blue-600">Paket <span class="font-bold">Starter</span> Anda hanya mendukung penyematan tautan via Google Drive. Tingkatkan langganan Anda untuk dapat mengunggah file PDF dan Excel langsung.</p>
                                     </div>
                                 </div>
-
-                                <!-- Total request size warning -->
-                                <div id="total-size-warning-{{ $req->id }}" class="mt-2 hidden rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-3">
-                                    <div class="flex items-start gap-2.5">
-                                        <svg class="h-4 w-4 shrink-0 text-rose-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
-                                        <div class="min-w-0 flex-1">
-                                            <p class="text-xs font-bold text-rose-700">Total berkas melebihi batas request:</p>
-                                            <p class="mt-1 text-[11px] text-rose-600">
-                                                Total ukuran berkas terpilih adalah <span id="total-size-current-{{ $req->id }}" class="font-bold">0 MB</span>, melebihi batas total maksimal sebesar <span class="font-bold">{{ $maxUploadMb }} MB</span>.
-                                            </p>
-                                            <p class="mt-1.5 text-[11px] text-rose-600">Silakan hapus beberapa berkas atau kurangi dokumen agar dapat diunggah bersamaan.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!-- Container for existing files (retained files) -->
-                                <div id="existing-files-container-{{ $req->id }}" class="mt-3 space-y-2"></div>
-
-                            </div>
+                            @endif
                         </div>
 
                         <!-- Footer -->
