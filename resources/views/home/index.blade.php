@@ -20,13 +20,13 @@
         <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 {{-- Badge --}}
-                <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/60 bg-white/60 px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm backdrop-blur-sm">
+                <!-- <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/60 bg-white/60 px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm backdrop-blur-sm">
                     <span class="relative flex h-2 w-2">
                         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75"></span>
                         <span class="relative inline-flex h-2 w-2 rounded-full bg-violet-500"></span>
                     </span>
                     Platform Digital Akreditasi LAM Infokom
-                </div>
+                </div> -->
 
                 {{-- Headline --}}
                 <h1 class="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
