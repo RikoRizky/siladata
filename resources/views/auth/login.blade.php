@@ -93,7 +93,7 @@
         </div>
         @unless (Route::has('register'))
             <p class="pt-4 text-center text-xs leading-relaxed text-slate-500">
-                Akun program studi dibuat oleh <strong>administrator</strong>. Hubungi admin institusi untuk mendapatkan akses.
+                Belum memiliki akun program studi? Silakan <a href="{{ route('harga') }}" class="font-semibold text-violet-600 hover:text-violet-500 hover:underline">pilih paket langganan.</a>
             </p>
         @endunless
     </form>
