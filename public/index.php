@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 
+// Sembunyikan notifikasi deprecation PHP 8.5+ agar tidak bocor ke tampilan web
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
 // Sesuaikan batas unggahan jika SAPI mengizinkan (tidak berlaku untuk semua server).
 @ini_set('upload_max_filesize', '25M');
 @ini_set('post_max_size', '512M');

@@ -1,5 +1,8 @@
 <?php
 
+// Sembunyikan notifikasi deprecation PHP 8.5+ agar tidak bocor ke output/tampilan
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
 use App\Http\Middleware\EnsureUserRole;
 use App\Support\AccreditationUpload;
 use Illuminate\Foundation\Application;
